@@ -46,25 +46,29 @@ function displayMenuItems(menu) {
     }
 }
 
+//Initialize total variable
+let total = 0;
 // Callback function for adding an item to the order
-function addToOrder(itemName) {
+function addToOrder(item) {
     // Get the order items list and the order total element from the HTML
-
+    const orderItemsEL = document.getElementById("order-items");
+    const orderTotalEL = document.getElementById("order-total");
     // Create a list item for the order
-
+    const orderedListItemEl = document.createElement("li");
     // Set the text content of the list item to the item name
-
+    orderedListItemEl.textContent = `${item.name}: R${item.price}`;
     // Append the list item to the order items list
-
+    orderItemsEL.appendChild(orderedListItemEl);
     // Calculate and update the total price
-
+    total += item.price;
     // Update the text content of the order total element with the new total
+    orderTotalEL.textContent = total.toFixed(2);
 }
 
 // Function to initialize the menu system
 function initMenuSystem(menu) {
     // Call the function to display menu items
-    displayMenuItems(menu)
+    displayMenuItems(menu);
 }
 
 // Start the menu system by calling the init function
