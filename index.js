@@ -16,6 +16,8 @@ const menu = {
 
 // Function to display menu items by category
 function displayMenuItems(menu) {
+    //Store the returned function from the outer function of the closure
+    const updateTotalInnerClosure = handleTotalUpdate()
     // Get the menu container element from the HTML
     const menuEl = document.getElementById("menu");    
     // Loop through each category and its items in the menu object
@@ -38,7 +40,7 @@ function displayMenuItems(menu) {
             itemsEl.textContent = `${items[i].name}: R${items[i].price}`;
             // Attach a click event listener to the list item to add it to the order
             itemsEl.addEventListener("click", () => {
-                addToOrder(items[i]);
+                addToOrder(items[i], updateTotalInnerClosure);
             })
             // Append the list item to the list of items
             listEl.appendChild(itemsEl);
@@ -46,10 +48,9 @@ function displayMenuItems(menu) {
     }
 }
 
-//Initialize total variable
-let total = 0;
+
 // Callback function for adding an item to the order
-function addToOrder(item) {
+function addToOrder(item, updateTotalInnerClosure) {
     // Get the order items list and the order total element from the HTML
     const orderItemsEL = document.getElementById("order-items");
     const orderTotalEL = document.getElementById("order-total");
@@ -59,10 +60,19 @@ function addToOrder(item) {
     orderedListItemEl.textContent = `${item.name}: R${item.price}`;
     // Append the list item to the order items list
     orderItemsEL.appendChild(orderedListItemEl);
-    // Calculate and update the total price
-    total += item.price;
     // Update the text content of the order total element with the new total
-    orderTotalEL.textContent = total.toFixed(2);
+    orderTotalEL.textContent = updateTotalInnerClosure(item.price).toFixed(2);
+}
+
+// Closure to calculate and update the total price.
+function handleTotalUpdate () {
+    let total = 0;
+    //Return a function that updates the total
+    return function updateTotal (price) {
+        total += price;
+        //Return the updated total
+        return total;
+    }
 }
 
 // Function to initialize the menu system
