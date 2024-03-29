@@ -1,15 +1,15 @@
 // Sample menu data (Consider fetching this data from a server in a real-world scenario)
 const menu = {
     Starters: [
-        {name:"Garlic Bread", price: 100}, 
-        {name:"Bruschetta", price: 150}
+        {name:"Garlic Bread", price: 60},
+        {name:"Bruschetta", price: 75}
     ],
     MainCourses: [
-        {name: "Margherita Pizza", price: 80},
-        {name: "Spaghetti Carbonara", price: 95}
+        {name: "Margherita Pizza", price: 95},
+        {name: "Spaghetti Carbonara", price: 120}
         ],
     Desserts: [
-        {name:"Tiramisu", price: 120}, 
+        {name:"Tiramisu", price: 70},
         {name: "Cheesecake", price: 65}
     ]
 };
